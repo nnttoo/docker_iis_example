@@ -1,10 +1,19 @@
-FROM debian:bullseye
+FROM ubuntu:20.04
 
-# Install Nginx dan PHP 7.4-FPM
+# Set timezone untuk menghindari prompt interaktif
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Update dan install dependensi dasar serta PHP 8.1
 RUN apt-get update && apt-get install -y \
+    software-properties-common \
+    gnupg2 \
+    curl \
+    ca-certificates \
     nginx \
-    php7.4-fpm \
-    php7.4-cli \
+    && add-apt-repository ppa:ondrej/php && \
+    apt-get update && apt-get install -y \
+    php8.1-fpm \
+    php8.1-cli \
     nano \
     sudo \
     && rm -rf /var/lib/apt/lists/*
