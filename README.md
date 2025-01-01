@@ -2,6 +2,10 @@
 
 For the Indonesian version, you can click [here](./README_id.md).
 
+## Note
+- `.gitattributes` becomes important if we are developing on Windows as it relates to End Of Line (EOL).  
+  [https://blog.programster.org/fixing-docker-volume-windows-line-endings-on-bash-scripts](https://blog.programster.org/fixing-docker-volume-windows-line-endings-on-bash-scripts)
+
 ## Clone This Repository
 
 ## Create Docker Image

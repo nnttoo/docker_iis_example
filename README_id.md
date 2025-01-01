@@ -2,6 +2,10 @@
 
 Untuk bahasa indonesia anda bisa klik di ![sini](./README_id.md) 
 
+## Catatan
+ - .gitattributes menjadi penting jika kita akan develep di windows karena berkaitan dengan End Of Line
+ https://blog.programster.org/fixing-docker-volume-windows-line-endings-on-bash-scripts
+
 ## Cloning Repositori ini 
 
 ## Buat Docker image 
