@@ -1,0 +1,51 @@
+FROM ubuntu:20.04
+
+# Set timezone untuk menghindari prompt interaktif
+ENV DEBIAN_FRONTEND=noninteractive
+
+RUN apt-get update && apt-get install -y \ 
+    software-properties-common
+# Update dan install dependensi dasar serta PHP 8.1
+RUN apt-get update && apt-get install -y \ 
+    gnupg2 \
+    curl \
+    openssl \
+    ca-certificates \
+    nginx \
+    && add-apt-repository ppa:ondrej/php && \
+    apt-get update && apt-get install -y \
+    php8.1-fpm \
+    php8.1-cli \
+    php8.1-mbstring \
+    php8.1-xml \
+    php8.1-bcmath \
+    php8.1-mysql \
+    php8.1-curl \   
+    nano \
+    sudo  
+
+RUN apt-get update && apt-get install -y \
+    git \
+    php8.1-zip \
+    unzip
+ 
+    
+RUN rm -rf /var/lib/apt/lists/*
+# Install Composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+# Salin file konfigurasi Nginx
+COPY nginx.conf /etc/nginx/nginx.conf 
+
+# Salin entrypoint
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
+# Set default working directory
+WORKDIR /var/www/html
+
+# Ekspos port 80
+EXPOSE 80
+
+# Jalankan script entrypoint
+CMD ["/entrypoint.sh"]

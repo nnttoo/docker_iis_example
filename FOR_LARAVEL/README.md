@@ -65,7 +65,38 @@ In the `volumes` section, the following line is specified:
 
 This configuration creates a bind mount that connects the `src` folder on the host machine to the `/var/www/html` folder inside the Docker container. As a result, any changes made to the files in the `src` folder on the host are immediately reflected inside the container. This simplifies application development, as you do not need to manually reload files into the container. Nginx running inside the container will automatically serve files from the mounted folder.
 
- 
+Here’s the translated version in English:
+
+---
+
 # Laravel
 
-For Laravel, you can check the folder [laravel](./FOR_LARAVEL/)
+## Enter Docker Shell
+Right-click on the running Docker container and then attach the Shell.
+
+![img](./docimg/attach_shell.png)
+
+## Execute the following commands in the Docker shell
+
+### Switch to the /var/www/html folder
+
+```sh
+cd /var/www/html/
+```
+
+### Create a Laravel Project  
+This step is not necessary if you prefer to leave the existing example Laravel project from Git as it is.
+
+```sh
+composer create-project --prefer-dist laravel/laravel project_name
+```
+
+### Install Laravel
+
+```sh
+cd project_name && composer install
+```
+
+```sh
+sudo chown -R www-data:www-data /var/www/html/project_name/storage
+```

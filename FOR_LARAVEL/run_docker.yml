@@ -1,0 +1,9 @@
+version: '3'
+services:
+  web:
+    image: my-nginx-php
+    volumes:
+      - ./src:/var/www/html
+    ports:
+      - "8089:80"
+    restart: always
