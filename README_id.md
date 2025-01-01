@@ -39,3 +39,26 @@ Sekarang anda sudah bisa mengakses http://localhost:8089/ , dan seharusnya sudah
   ```
   ![img](./docimg/rewrite_url.png)
 
+## Memahami Bind Mount dalam Docker Volumes
+ 
+Pada file `run_docker.yml`, terdapat konfigurasi sebagai berikut:
+
+```yml
+version: '3'
+services:
+  web:
+    image: my-nginx-php
+    volumes:
+      - ./src:/var/www/html
+    ports:
+      - "8089:80"
+    restart: always
+```
+
+Pada bagian `volumes`, terdapat baris berikut:
+
+```sh
+./src:/var/www/html
+```
+
+Konfigurasi ini membuat bind mount yang menghubungkan folder `src` di komputer host ke folder `/var/www/html` di dalam container Docker. Dengan demikian, perubahan yang Anda lakukan pada file di folder `src` secara langsung tercermin di dalam container. Hal ini memudahkan pengembangan aplikasi karena Anda tidak perlu memuat ulang file secara manual ke dalam container. Nginx di dalam container secara otomatis akan menyajikan file dari folder yang telah di-mount tersebut.

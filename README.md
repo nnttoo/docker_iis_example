@@ -36,3 +36,27 @@ Now, you should be able to access it at http://localhost:8089/. It should be up 
     Rewrite URL : http://localhost:8089/{R:1}
   ```
   ![img](./docimg/rewrite_url.png)
+
+## Understanding Bind Mounts in Docker Volumes
+
+In the `run_docker.yml` file, the following configuration is defined:
+
+```yml
+version: '3'
+services:
+  web:
+    image: my-nginx-php
+    volumes:
+      - ./src:/var/www/html
+    ports:
+      - "8089:80"
+    restart: always
+```
+
+In the `volumes` section, the following line is specified:
+
+```sh
+./src:/var/www/html
+```
+
+This configuration creates a bind mount that connects the `src` folder on the host machine to the `/var/www/html` folder inside the Docker container. As a result, any changes made to the files in the `src` folder on the host are immediately reflected inside the container. This simplifies application development, as you do not need to manually reload files into the container. Nginx running inside the container will automatically serve files from the mounted folder.
